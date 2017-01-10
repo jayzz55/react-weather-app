@@ -1,12 +1,15 @@
 import React from 'react'
+import GetLocation from './GetLocation'
+import { homeStyles } from '../styles/index'
 
-const Home = React.createClass({
-  render: function() {
-    return (
-      <h1>Hello World!!!</h1>
-    );
-  },
-});
+function Home () {
+  return (
+    <div style={homeStyles.container}>
+      <h1 style={homeStyles.header}>Enter a City and State</h1>
+      <GetLocation />
+    </div>
+  );
+}
 
 export default Home
 
