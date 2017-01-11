@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 import GetLocation from '../components/GetLocation'
 import weatherApiHelper from '../utils/weatherApiHelper'
 
 const GetLocationContainer = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getDefaultProps () {
     return {
       direction: 'column'
@@ -22,9 +26,10 @@ const GetLocationContainer = React.createClass({
     })
   },
   handleSubmitCity () {
-    console.log(this.state.city);
-    weatherApiHelper.getCurrentWeatherInfo(this.state.city)
-      .then((info) => {console.log(info)})
+    // console.log(this.state.city);
+    // weatherApiHelper.getCurrentWeatherInfo(this.state.city)
+    //   .then((info) => {console.log(info)})
+    this.context.router.push('/forecast/' + this.state.city)
   },
   render () {
     return (
