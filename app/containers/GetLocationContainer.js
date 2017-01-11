@@ -26,7 +26,7 @@ const GetLocationContainer = React.createClass({
   render () {
     return (
       <GetLocation
-        direction={this.props.city}
+        direction={this.props.direction}
         onUpdateCity={this.handleUpdateCity}
         onSubmitCity={this.handleSubmitCity}
         city={this.state.city} />

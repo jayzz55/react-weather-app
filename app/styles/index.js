@@ -35,3 +35,14 @@ export const getLocationStyles = {
     margin: '10'
   }
 }
+
+export const headerStyles = {
+  container: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    background: 'rgba(252, 90, 44, 0.89)',
+    color: '#fff',
+    padding: 5
+  }
+}
