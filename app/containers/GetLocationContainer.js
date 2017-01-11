@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import GetLocation from '../components/GetLocation'
+import weatherApiHelper from '../utils/weatherApiHelper'
 
 const GetLocationContainer = React.createClass({
   getDefaultProps () {
@@ -22,6 +23,8 @@ const GetLocationContainer = React.createClass({
   },
   handleSubmitCity () {
     console.log(this.state.city);
+    weatherApiHelper.getCurrentWeatherInfo(this.state.city)
+      .then((info) => {console.log(info)})
   },
   render () {
     return (
