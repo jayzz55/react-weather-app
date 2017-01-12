@@ -13,11 +13,12 @@ const GetLocationContainer = React.createClass({
     }
   },
   propTypes: {
-    direction: PropTypes.string
+    direction: PropTypes.string,
+    city: PropTypes.string
   },
   getInitialState () {
     return {
-      city: ''
+      city: this.props.city || ''
     }
   },
   handleUpdateCity (e) {

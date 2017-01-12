@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import GetLocationContainer from '../containers/GetLocationContainer'
+import Header from '../components/Header'
 import { homeStyles } from '../styles/index'
+import { mainStyles } from '../styles/index'
 
-function Home () {
+function Home (props) {
   return (
-    <div style={homeStyles.container}>
-      <h1 style={homeStyles.header}>Enter a City and State</h1>
-      <GetLocationContainer />
+    <div style={mainStyles.container}>
+      <Header city={props.params.city} />
+      <div style={homeStyles.container}>
+        <h1 style={homeStyles.header}>Enter a City and State</h1>
+        <GetLocationContainer city={props.params.city} />
+      </div>
     </div>
   );
 }
 
-export default Home
+Home.propTypes = {
+  params: PropTypes.object
+}
 
+export default Home
