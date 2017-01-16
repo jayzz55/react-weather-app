@@ -28,6 +28,11 @@ const GetLocationContainer = React.createClass({
   handleSubmitCity () {
     this.context.router.push('/forecast/' + this.state.city)
   },
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      city: nextProps.city
+    })
+  },
   render () {
     return (
       <GetLocation
