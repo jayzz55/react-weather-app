@@ -6,18 +6,27 @@ const WeatherForecastContainer = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
-  getInitialState: function () {
+  getInitialState () {
     return {
       isLoading: true,
+      city: this.props.params.city,
       weatherForecasts: [],
     }
   },
+  componentWillReceiveProps (nextProps) {
+    this.fetchInfo(nextProps.params.city)
+  },
   componentDidMount () {
-    const query = this.props.location.query
-    weatherApiHelper.getWeatherForecastInfo(this.state.city)
+    this.fetchInfo(this.state.city)
+  },
+  fetchInfo (city) {
+    weatherApiHelper.getWeatherForecastInfo(city)
       .then((info) => (
         this.setState({
-          isLoading: false
+          isLoading: false,
+          weatherForecasts: info.data.list.map((forecast) => (
+            1
+          ))
         }),
         console.log(info)
       ))
@@ -26,6 +35,7 @@ const WeatherForecastContainer = React.createClass({
     return (
       <WeatherForecast
         params={this.props.params}
+        weatherForecasts={this.state.weatherForecasts}
         isLoading={this.state.isLoading} />
     )
   }

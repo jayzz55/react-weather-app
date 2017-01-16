@@ -13,13 +13,14 @@ function WeatherForecast (props) {
     : (
     <div style={mainStyles.container}>
       <Header city={props.params.city} />
-      <h1>Weather forecast component</h1>
+      <h1>{props.params.city}</h1>
     </div>
   )
 }
 
 WeatherForecast.propTypes = {
   params: PropTypes.object,
+  weatherForecasts: PropTypes.array,
   isLoading: PropTypes.bool
 }
 
