@@ -14,9 +14,20 @@ const WeatherForecastContainer = React.createClass({
   },
   componentDidMount () {
     const query = this.props.location.query
+    weatherApiHelper.getWeatherForecastInfo(this.state.city)
+      .then((info) => (
+        this.setState({
+          isLoading: false
+        }),
+        console.log(info)
+      ))
   },
   render () {
-    <WeatherForecast />
+    return (
+      <WeatherForecast
+        params={this.props.params}
+        isLoading={this.state.isLoading} />
+    )
   }
 })
 
