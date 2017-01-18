@@ -25,10 +25,9 @@ const WeatherForecastContainer = React.createClass({
         this.setState({
           isLoading: false,
           weatherForecasts: info.data.list.map((forecast) => (
-            1
+            forecast
           ))
-        }),
-        console.log(info)
+        })
       ))
   },
   render () {
