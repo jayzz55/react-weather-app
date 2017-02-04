@@ -7,14 +7,13 @@ function Button ({onSubmitCity, children}) {
     <button type='button'
       style={getLocationStyles.button}
       className='btn btn-success'
-      onClick={onSubmitCity}>
+      type="submit">
       {children}
     </button>
   )
 }
 
 Button.propTypes = {
-  onSubmitCity: PropTypes.func.isRequired,
   children: PropTypes.node
 }
 
@@ -39,15 +38,14 @@ function GetLocation ({onUpdateCity, onSubmitCity, city, direction}) {
         containerStyle = [getLocationStyles.container, {flexDirection}]
 
   return (
-    <div style={containerStyle}>
+    <form style={containerStyle} onSubmit={onSubmitCity} >
       <InputField
         onUpdateCity={onUpdateCity}
         city={city} />
-      <Button
-        onSubmitCity={onSubmitCity}>
+      <Button>
         Get Weather
       </Button>
-    </div>
+    </form>
   )
 }
 

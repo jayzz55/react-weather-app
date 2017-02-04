@@ -8,7 +8,8 @@ const GetLocationContainer = React.createClass({
   },
   getDefaultProps () {
     return {
-      direction: 'column'
+      direction: 'column',
+      city: ''
     }
   },
   propTypes: {
@@ -17,7 +18,7 @@ const GetLocationContainer = React.createClass({
   },
   getInitialState () {
     return {
-      city: this.props.city || ''
+      city: this.props.city
     }
   },
   handleUpdateCity (e) {
@@ -25,7 +26,9 @@ const GetLocationContainer = React.createClass({
       city: e.target.value
     })
   },
-  handleSubmitCity () {
+  handleSubmitCity (e) {
+    e.preventDefault();
+
     this.context.router.push('/forecast/' + this.state.city)
   },
   componentWillReceiveProps (nextProps) {
