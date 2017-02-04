@@ -25,16 +25,18 @@ const WeatherForecastContainer = React.createClass({
   componentDidMount () {
     this.fetchInfo(this.state.city)
   },
-  fetchInfo (city) {
-    weatherApiHelper.getWeatherForecastInfo(city)
-      .then((info) => (
-        this.setState({
-          isLoading: false,
-          weatherForecasts: info.data.list.map((forecast) => (
-            forecast
-          ))
-        })
-      ))
+  async fetchInfo (city) {
+    try {
+      const info = await weatherApiHelper.getWeatherForecastInfo(city);
+      this.setState({
+        isLoading: false,
+        weatherForecasts: info.data.list.map((forecast) => (
+          forecast
+        ))
+      })
+    } catch (error) {
+      console.log('Error in handleGetUser', error)
+    }
   },
   handleClick: function (dayIndex) {
     this.context.router.push({
