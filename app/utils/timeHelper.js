@@ -23,13 +23,27 @@ const monthsMap = {
   "11":"Dec"
 };
 
+const dayTranslationMap = {
+  "today":1,
+  "tomorrow":2,
+  "day-1":1,
+  "day-2":2,
+  "day-3":3,
+  "day-4":4,
+  "day-5":5
+}
+
 export function convertTemp (kelvin) {
   return parseInt(((kelvin - 273.15)* 1.8000 + 32.00), 10)
 }
 
-export function getDate (unixTimestmap) {
-  const date = new Date(unixTimestmap * 1000);
+export function getDate (unixTimestamp) {
+  const date = new Date(unixTimestamp * 1000);
   const day = daysMap[date.getDay()]
   const month = monthsMap[date.getMonth()] + ' ' + date.getDate();
   return day + ', ' + month;
+}
+
+export function translateDay (day) {
+  return dayTranslationMap[day.toLowerCase()];
 }

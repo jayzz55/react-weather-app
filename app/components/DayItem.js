@@ -19,11 +19,11 @@ const styles = {
   }
 }
 
-function DayItem ({day}) {
+function DayItem ({day, handleClick}) {
   const date = getDate(day.dt);
   const icon = day.weather[0].icon;
   return (
-    <div style={styles.dayContainer}>
+    <div style={styles.dayContainer} onClick={handleClick}>
       <img style={styles.weather} src={'./app/images/weather-icons/' + icon + '.svg'} alt='Weather' />
       <h2 style={styles.subheader}>{date}</h2>
     </div>
@@ -35,6 +35,7 @@ DayItem.propTypes = {
     dt: PropTypes.number.isRequired,
     weather: PropTypes.array.isRequired,
   }).isRequired,
+  handleClick: PropTypes.func
 }
 
 export default DayItem

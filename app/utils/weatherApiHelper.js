@@ -7,10 +7,10 @@ const apiKey = '9291b3a83ff7dd59f1e66df1c306d4fa',
 
 const weatherApiHelper = {
   getCurrentWeatherInfo (city) {
-    return axios.get(`${currentWeatherUrl}?q=${city}&type=accurate&APPID=${apiKey}`);
+    return axios.get(`${currentWeatherUrl}?q=${city}&type=accurate&APPID=${apiKey}&units=metric`);
   },
   getWeatherForecastInfo (city, forecastDays=5) {
-    return axios.get(`${weatherForecastUrl}?q=${city}&type=accurate&APPID=${apiKey}&cnt=${forecastDays}`);
+    return axios.get(`${weatherForecastUrl}?q=${city}&type=accurate&APPID=${apiKey}&cnt=${forecastDays}&units=metric`);
   }
 }
 

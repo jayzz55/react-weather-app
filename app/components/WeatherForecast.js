@@ -29,15 +29,18 @@ const styles = {
   }
 }
 
-function ForecastUI ({city, weatherForecasts}) {
+function ForecastUI ({city, weatherForecasts, handleClick}) {
   return (
     <div style={{textAlign: 'center'}}>
       <h1 style={styles.header}>{city}</h1>
       <p style={styles.subheader}>Select a day</p>
       <div style={styles.container}>
         {
-          weatherForecasts.map((listItem) => (
-            <DayItem key={listItem.dt} day={listItem} />
+          weatherForecasts.map((listItem, index) => (
+            <DayItem
+              key={listItem.dt}
+              day={listItem}
+              handleClick={handleClick.bind(null, index)}/>
           ))
         }
       </div>
@@ -49,26 +52,28 @@ ForecastUI.propTypes = {
   weatherForecasts: PropTypes.array
 }
 
-function WeatherForecast ({isLoading, params, weatherForecasts}) {
+function WeatherForecast ({isLoading, city, weatherForecasts, handleClick}) {
   return (isLoading === true)
     ? (
       <div style={mainStyles.container}>
-        <Header city={params.city} />
+        <Header city={city} />
         <Loading />
       </div>)
     : (
     <div style={mainStyles.container}>
-      <Header city={params.city} />
+      <Header city={city} />
       <ForecastUI
-      city={params.city}
+      city={city}
+      handleClick={handleClick}
       weatherForecasts={weatherForecasts} />
     </div>
   )
 }
 
 WeatherForecast.propTypes = {
-  params: PropTypes.object,
+  city: PropTypes.string,
   weatherForecasts: PropTypes.array,
+  handleClick: PropTypes.func,
   isLoading: PropTypes.bool
 }
 

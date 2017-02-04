@@ -9,6 +9,7 @@ const routes = (
     <Route path='/' component={Main}>
       <IndexRoute component={Home} />
       <Route path='forecast/:city' component={WeatherForecastContainer} />
+      <Route path='forecast/:city/details/:day' component={WeatherForecastContainer} />
     </Route>
   </Router>
 )

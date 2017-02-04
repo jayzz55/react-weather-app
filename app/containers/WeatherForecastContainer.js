@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import WeatherForecast from '../components/WeatherForecast'
+import ForecastDetail from '../components/ForecastDetail'
 import weatherApiHelper from '../utils/weatherApiHelper'
+import { translateDay } from '../utils/timeHelper'
 
 const WeatherForecastContainer = React.createClass({
   contextTypes: {
@@ -10,11 +12,15 @@ const WeatherForecastContainer = React.createClass({
     return {
       isLoading: true,
       city: this.props.params.city,
+      day: this.props.params.day,
       weatherForecasts: [],
     }
   },
   componentWillReceiveProps (nextProps) {
     this.fetchInfo(nextProps.params.city)
+    this.setState({
+      day: nextProps.params.day
+    })
   },
   componentDidMount () {
     this.fetchInfo(this.state.city)
@@ -30,13 +36,31 @@ const WeatherForecastContainer = React.createClass({
         })
       ))
   },
+  handleClick: function (dayIndex) {
+    this.context.router.push({
+      pathname: '/forecast/' + this.props.routeParams.city + '/details/day-' + (dayIndex + 1)
+    })
+  },
   render () {
-    return (
-      <WeatherForecast
-        params={this.props.params}
-        weatherForecasts={this.state.weatherForecasts}
-        isLoading={this.state.isLoading} />
-    )
+    if (this.state.day) {
+      const dayIndex = translateDay(this.state.day) - 1;
+      const weather = this.state.weatherForecasts[dayIndex] || {};
+
+      return (
+        <ForecastDetail
+          city={this.props.params.city}
+          weather={weather}
+          isLoading={this.state.isLoading} />
+      )
+    } else {
+      return (
+        <WeatherForecast
+          city={this.props.params.city}
+          weatherForecasts={this.state.weatherForecasts}
+          handleClick={this.handleClick}
+          isLoading={this.state.isLoading} />
+      )
+    }
   }
 })
 
